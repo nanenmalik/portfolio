@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nurul Nasreen — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #141414;
+    --bg3: #1a1a1a;
+    --card: #181818;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0ede6;
+    --muted: #888780;
+    --accent: #c9a96e;
+    --accent2: #7eb8a4;
+    --accent3: #b07db8;
+    --tag-bg: rgba(201,169,110,0.12);
+    --tag-text: #c9a96e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--accent); letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 300; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 6rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(201,169,110,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(126,184,164,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .hero-tag { display: inline-block; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.12em; color: var(--accent); background: var(--tag-bg); border: 1px solid rgba(201,169,110,0.2); padding: 0.35rem 0.9rem; border-radius: 2rem; margin-bottom: 1.5rem; text-transform: uppercase; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); line-height: 1.1; font-weight: 400; margin-bottom: 0.5rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub { font-size: 1rem; color: var(--muted); font-weight: 300; margin-bottom: 2rem; max-width: 440px; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 400; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-family: inherit; }
+  .btn-primary { background: var(--accent); color: #0d0d0d; }
+  .btn-primary:hover { background: #d4b57e; }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border2); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-visual { position: relative; }
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem;
+    position: relative;
+  }
+  .hero-card::before { content: ''; position: absolute; top: -1px; left: 2rem; right: 2rem; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .stat-item { background: var(--bg3); border-radius: 0.5rem; padding: 1rem; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+  .availability { display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem 1rem; background: rgba(126,184,164,0.08); border: 1px solid rgba(126,184,164,0.2); border-radius: 0.5rem; }
+  .avail-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .avail-text { font-size: 0.8rem; color: var(--accent2); }
+
+  /* SECTIONS */
+  section { padding: 5rem 3rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 400; margin-bottom: 0.75rem; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; margin-bottom: 3rem; }
+  .section-title em { font-style: italic; color: var(--muted); }
+  .divider { width: 100%; height: 1px; background: var(--border); margin: 0; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { color: rgba(240,237,230,0.75); margin-bottom: 1rem; font-weight: 300; }
+  .lang-list { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .lang-pill { font-size: 0.8rem; padding: 0.3rem 0.9rem; border-radius: 2rem; border: 1px solid var(--border2); color: var(--muted); }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; transition: border-color 0.2s; }
+  .skill-card:hover { border-color: var(--border2); }
+  .skill-icon { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  .skill-title { font-size: 0.85rem; font-weight: 500; color: var(--accent); margin-bottom: 0.75rem; letter-spacing: 0.03em; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 0.25rem; background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border); }
+  .exp-item:first-child { border-top: 1px solid var(--border); }
+  .exp-date { font-size: 0.8rem; color: var(--muted); font-weight: 300; padding-top: 0.15rem; }
+  .exp-role { font-weight: 500; font-size: 0.975rem; margin-bottom: 0.25rem; }
+  .exp-org { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.5rem; }
+  .exp-desc { font-size: 0.875rem; color: rgba(240,237,230,0.6); font-weight: 300; }
+
+  /* CERTIFICATIONS */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; transition: border-color 0.2s; }
+  .cert-card:hover { border-color: var(--border2); }
+  .cert-card.featured { border-color: rgba(201,169,110,0.35); background: rgba(201,169,110,0.04); }
+  .cert-name { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .cert-year { font-size: 0.75rem; color: var(--muted); }
+  .cert-badge { font-size: 0.7rem; padding: 0.2rem 0.55rem; border-radius: 2rem; background: var(--tag-bg); color: var(--accent); border: 1px solid rgba(201,169,110,0.2); white-space: nowrap; }
+
+  /* CAMPUS */
+  .campus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+  .campus-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; transition: border-color 0.2s; }
+  .campus-card:hover { border-color: var(--border2); }
+  .campus-role { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .campus-org { font-size: 0.78rem; color: var(--accent2); margin-bottom: 0.5rem; }
+  .campus-desc { font-size: 0.825rem; color: rgba(240,237,230,0.55); font-weight: 300; }
+
+  /* CONTACT */
+  .contact-section { background: var(--bg2); }
+  .contact-inner { max-width: 700px; text-align: center; margin: 0 auto; }
+  .contact-inner .section-title { margin-bottom: 1rem; }
+  .contact-inner p { color: var(--muted); margin-bottom: 2.5rem; font-weight: 300; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--muted); text-decoration: none; font-size: 0.875rem; padding: 0.6rem 1.25rem; border: 1px solid var(--border); border-radius: 0.375rem; transition: all 0.2s; }
+  .contact-link:hover { color: var(--accent); border-color: rgba(201,169,110,0.3); }
+
+  /* FOOTER */
+  footer { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-size: 0.8rem; color: var(--muted); font-weight: 300; }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Nasreen.</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#campus">Campus</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-tag">Open to internship</span>
+      <h1>Nurul Nasreen<br><em>Binti Abdul Malik</em></h1>
+      <p class="hero-sub">IT undergraduate specializing in Information Assurance &amp; Security. Builder, breaker, and creative problem-solver.</p>
+      <div class="hero-cta">
+        <a href="mailto:nasreen.malik@student.iium.edu.my" class="btn btn-primary">Get in touch</a>
+        <a href="https://github.com/nanenmalik" class="btn btn-outline">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="stat-num">3.64</div>
+            <div class="stat-label">Current CGPA</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4.00</div>
+            <div class="stat-label">Co-curricular avg.</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">9+</div>
+            <div class="stat-label">Certifications &amp; awards</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">12+</div>
+            <div class="stat-label">Tech skills</div>
+          </div>
+        </div>
+        <div class="availability">
+          <div class="avail-dot"></div>
+          <div class="avail-text">Available for internship · 27 Jul 2026 – 27 Jan 2027</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container fade-in">
+    <p class="section-label">About me</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-title">A curious mind at the<br><em>intersection of code &amp; security</em></div>
+        <p>A highly motivated Information Technology undergraduate at IIUM, specializing in Information Assurance and Security. Actively seeking an internship opportunity (27 July 2026 – 27 January 2027) to learn, contribute fresh ideas, and deliver value to both industry and community.</p>
+        <p>Experienced in web and application development, cybersecurity, UI/UX design, creative content, leadership, and cross-functional team collaboration. Equally comfortable writing clean front-end code and thinking like an attacker.</p>
+        <div class="lang-list">
+          <span class="lang-pill">Malay — Native</span>
+          <span class="lang-pill">English — Proficient</span>
+          <span class="lang-pill">Arabic — Basic</span>
+        </div>
+      </div>
+      <div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:0.75rem;padding:1.5rem;">
+          <p style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Education</p>
+          <div style="margin-bottom:1.25rem;">
+            <p style="font-size:0.875rem;font-weight:500;margin-bottom:0.2rem;">B.IT — Information Assurance &amp; Security</p>
+            <p style="font-size:0.8rem;color:var(--accent);margin-bottom:0.2rem;">International Islamic University Malaysia</p>
+            <p style="font-size:0.78rem;color:var(--muted);">Expected Dec 2027 · CGPA 3.64</p>
+          </div>
+          <div style="border-top:1px solid var(--border);padding-top:1.25rem;">
+            <p style="font-size:0.875rem;font-weight:500;margin-bottom:0.2rem;">Foundation of Laws</p>
+            <p style="font-size:0.8rem;color:var(--accent);margin-bottom:0.2rem;">Centre for Foundation Studies, IIUM</p>
+            <p style="font-size:0.78rem;color:var(--muted);">Jan 2022 · CGPA 3.45</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container fade-in">
+    <p class="section-label">Technical skills</p>
+    <h2 class="section-title">What I <em>work with</em></h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">⟨/⟩</div>
+        <div class="skill-title">Programming &amp; Frameworks</div>
+        <div class="skill-tags">
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          <span class="tag">React</span><span class="tag">React Native</span><span class="tag">PHP</span>
+          <span class="tag">Laravel</span><span class="tag">WordPress</span><span class="tag">R</span>
+          <span class="tag">Tailwind CSS</span><span class="tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">◈</div>
+        <div class="skill-title">Database Management</div>
+        <div class="skill-tags">
+          <span class="tag">MySQL</span><span class="tag">Firebase</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">✦</div>
+        <div class="skill-title">Design Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Figma</span><span class="tag">Framer</span>
+          <span class="tag">Canva</span><span class="tag">Adobe Photoshop</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⊞</div>
+        <div class="skill-title">Collaboration &amp; Productivity</div>
+        <div class="skill-tags">
+          <span class="tag">GitHub</span><span class="tag">Microsoft Excel</span>
+          <span class="tag">Google Sheets</span><span class="tag">Notion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container fade-in">
+    <p class="section-label">Work experience</p>
+    <h2 class="section-title">Where I've <em>worked</em></h2>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-date">Oct 2024 – Feb 2025</div>
+        <div>
+          <div class="exp-role">Work Study Student</div>
+          <div class="exp-org">Krave Baby Pancakes, Cafe Ruqayyah</div>
+          <div class="exp-desc">Balanced academic responsibilities alongside part-time work in a fast-paced café environment. Developed customer service and teamwork skills through daily food service operations.</div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-date">Sept 2024</div>
+        <div>
+          <div class="exp-role">Part-Timer</div>
+          <div class="exp-org">Nandos Booth, Jaya Grocer, KL East Mall</div>
+          <div class="exp-desc">Assisted with food preparation, customer interaction, and booth operations.</div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-date">May 2023</div>
+        <div>
+          <div class="exp-role">Part-Timer</div>
+          <div class="exp-org">Biscuit Booth, KL East Mall</div>
+          <div class="exp-desc">Managed product display and handled customer transactions in a retail setting.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container fade-in">
+    <p class="section-label">Certifications &amp; awards</p>
+    <h2 class="section-title">Recognition &amp; <em>achievements</em></h2>
+    <div class="cert-grid">
+      <div class="cert-card featured">
+        <div>
+          <div class="cert-name">CompTIA Security+</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <span class="cert-badge">Certified</span>
+      </div>
+      <div class="cert-card featured">
+        <div>
+          <div class="cert-name">2nd Place — FYP Award for Real-World Impact</div>
+          <div class="cert-year">2026</div>
+        </div>
+        <span class="cert-badge">Award</span>
+      </div>
+      <div class="cert-card">
+        <div>
+          <div class="cert-name">GIRL CTF 2024</div>
+          <div class="cert-year">2024</div>
+        </div>
+        <span class="cert-badge">CTF</span>
+      </div>
+      <div class="cert-card">
+        <div>
+          <div class="cert-name">ICE CTF Chapter 0</div>
+          <div class="cert-year">2024</div>
+        </div>
+        <span class="cert-badge">CTF</span>
+      </div>
+      <div class="cert-card">
+        <div>
+          <div class="cert-name">Top Coders Competition 2025</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <span class="cert-badge">Competition</span>
+      </div>
+      <div class="cert-card">
+        <div>
+          <div class="cert-name">GIRL CTF 2025</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <span class="cert-badge">CTF</span>
+      </div>
+      <div class="cert-card">
+        <div>
+          <div class="cert-name">UMCS CTF</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <span class="cert-badge">CTF</span>
+      </div>
+      <div class="cert-card">
+        <div>
+          <div class="cert-name">ICE CTF Chapter 1</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <span class="cert-badge">CTF</span>
+      </div>
+      <div class="cert-card">
+        <div>
+          <div class="cert-name">DEADFACE CTF</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <span class="cert-badge">CTF</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CAMPUS -->
+<section id="campus">
+  <div class="container fade-in">
+    <p class="section-label">Campus &amp; leadership</p>
+    <h2 class="section-title">Beyond the <em>classroom</em></h2>
+    <div class="campus-grid">
+      <div class="campus-card">
+        <div class="campus-role">Group Leader — Research Team Website</div>
+        <div class="campus-org">KICT Kulliyyah · 2025</div>
+        <div class="campus-desc">Led a team to design and develop a functional website for the Research Team using WordPress.</div>
+      </div>
+      <div class="campus-card">
+        <div class="campus-role">Social Media Manager — Aikol Theatre Night</div>
+        <div class="campus-org">KYUDO CODE, IIUM · 2025</div>
+        <div class="campus-desc">Managed digital promotion and content strategy for Aikol Theatre Night.</div>
+      </div>
+      <div class="campus-card">
+        <div class="campus-role">Programme Coordinator — Talk Programme</div>
+        <div class="campus-org">IIUM · 2025</div>
+        <div class="campus-desc">Planned and managed a campus talk programme, overseeing logistics and participant coordination.</div>
+      </div>
+      <div class="campus-card">
+        <div class="campus-role">Head of Publication &amp; Promotion — Mock Parliament</div>
+        <div class="campus-org">CFS IIUM · 2024</div>
+        <div class="campus-desc">Directed all branding, social media content, and promotional materials for the Mock Parliament event.</div>
+      </div>
+      <div class="campus-card">
+        <div class="campus-role">Theatre Performer</div>
+        <div class="campus-org">Laila Majnun &amp; Steadfast Theatre Night · 2024–2025</div>
+        <div class="campus-desc">Performed in two major campus theatre productions, demonstrating creativity and public performance skills.</div>
+      </div>
+      <div class="campus-card">
+        <div class="campus-role">Member — Education &amp; Training Bureau</div>
+        <div class="campus-org">MELEX, Laws Student Society · 2023–2024</div>
+        <div class="campus-desc">Contributed to preparation and technical tasks under the Education and Training Bureau.</div>
+      </div>
+      <div class="campus-card">
+        <div class="campus-role">Facilitator Volunteer</div>
+        <div class="campus-org">Good Society Club, SMK Keramat Wangsa · 2023</div>
+        <div class="campus-desc">Volunteered as a student facilitator at a local secondary school community outreach programme.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-inner fade-in">
+      <p class="section-label">Get in touch</p>
+      <h2 class="section-title">Let's <em>connect</em></h2>
+      <p>Available for internship from 27 July 2026 to 27 January 2027. Open to opportunities in cybersecurity, web development, and IT roles.</p>
+      <div class="contact-links">
+        <a href="mailto:nasreen.malik@student.iium.edu.my" class="contact-link">✉ nasreen.malik@student.iium.edu.my</a>
+        <a href="https://linkedin.com/in/nasreen-malik-237150331" class="contact-link">in LinkedIn</a>
+        <a href="https://github.com/nanenmalik" class="contact-link">⌥ GitHub</a>
+        <a href="tel:+60104440454" class="contact-link">✆ +601-0444-0454</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Nurul Nasreen Binti Abdul Malik</p>
+  <p>Gombak, Selangor · IIUM</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
